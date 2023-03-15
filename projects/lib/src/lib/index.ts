@@ -270,8 +270,8 @@ export const localStorageSync = (config: LocalStorageConfig) => (reducer: any) =
 
         // If state arrives undefined, we need to let it through the supplied reducer
         // in order to get a complete state as defined by user
-        if (action.type === INIT_ACTION && !state) {
-            nextState = reducer(state, action);
+        if (!state) {
+            nextState = reducer(state, { type: 'ngrx-store-localstorage/pre-init' });
         } else {
             nextState = { ...state };
         }
